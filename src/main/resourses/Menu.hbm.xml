@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.du.entity.Menu" table="menu">
+		<id name="id" column="id">
+			<generator class="assigned" />
+		</id>
+		<property name="text" />
+		<property name="iconcls" />
+		<property name="url" />
+		<!-- 上级 -下级 一对多 -->
+		<set name="tmenus">
+			<key column="pid"/>
+			<one-to-many class="cn.du.entity.Menu"/>
+		</set>
+		<!-- 下级对上级 多对一 -->
+		<many-to-one name="tmenu" column="pid" class="cn.du.entity.Menu"></many-to-one>
+	</class>
+</hibernate-mapping>

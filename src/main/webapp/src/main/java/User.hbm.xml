@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.du.entity.User" table="User">
+		<id name="id" column="id">
+			<generator class="native" />
+		</id>
+		<property name="userName" />
+		<property name="userPswd" />
+		<property name="addr" />
+		<property name="tel" />
+		<property name="realName" />
+		
+		<!-- 用户 订单 一对多 -->
+		<set name="orders">
+			<key column="user_Id"></key>
+			<one-to-many class="cn.du.entity.Order" />
+		</set>
+		<!-- 用户 购物车 一对一 -->
+		<one-to-one name="shopCar" class="cn.du.entity.ShopCar" property-ref="user"></one-to-one>
+		<!-- 用户 收藏夹 一对一 -->
+		<one-to-one name="like" class="cn.du.entity.Like" property-ref="user"></one-to-one>
+	</class>
+</hibernate-mapping>

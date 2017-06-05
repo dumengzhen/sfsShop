@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="default" extends="struts-default" namespace="/">
+		<interceptors>
+			<!-- 设置响应头拦截器 -->
+			<interceptor name="header" class="cn.du.intercpter.AjaxProblem" />
+			<interceptor-stack name="headerStack">
+				<interceptor-ref name="header" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="headerStack" />
+		<action name="user_*" class="userAction" method="{1}"></action>
+		<action name="goods_*" class="goodsAction" method="{1}"></action>
+		<action name="type_*" class="typeAction" method="{1}"></action>
+		<action name="shopCar_*" class="shopCarAction" method="{1}"></action>
+		<action name="menu_*" class="menuAction" method="{1}">
+		</action>
+	</package>
+</struts>

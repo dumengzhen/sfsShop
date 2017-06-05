@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.du.entity.Type" table="Type">
+		<id name="id" column="id">
+			<generator class="native" />
+		</id>
+		<property name="tname" />
+		
+		<!-- 类型   商品 多对多 -->
+		<set name="goods" table="TypeGoods">
+			<key column="type_Id" />
+			<many-to-many column="goods_Id" class="cn.du.entity.Goods" />
+		</set>
+		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.du.entity.Goods" table="Goods">
+		<id name="id" column="id">
+			<generator class="native" />
+		</id>
+		<property name="goodsName" />
+		<property name="goodsPhotos" />
+		<property name="goodsInfo" />
+		<property name="goodsPrice"  />
+		<property name="goodsNum" />
+		<property name="sellNum" />
+		<property name="comment" />
+		<!-- 商品 购物车 多对多 -->
+		<list name="shopCars" table="GoodsShopCar">
+			<key>
+				<column name="goods_Id"></column>
+			</key>
+			<index column="carId" type="int"></index>
+			<many-to-many column="car_Id" class="cn.du.entity.ShopCar" />
+		</list>
+		<!-- 商品 收藏夹 多对多 -->
+		<set name="likes" table="GoodsLike">
+			<key column="goods_Id" />
+			<many-to-many column="like_Id" class="cn.du.entity.Like" />
+		</set>
+		<!-- 订单 商品  多对多 -->
+		<set name="orders" table="GoodsOrder">
+			<key column="goods_Id" />
+			<many-to-many column="order_Id" class="cn.du.entity.Order" />
+		</set>
+		<!-- 类型   商品 多对多 -->
+		<set name="types" table="TypeGoods">
+			<key column="goods_Id" />
+			<many-to-many column="type_Id" class="cn.du.entity.Type" />
+		</set>
+	</class>
+</hibernate-mapping>
